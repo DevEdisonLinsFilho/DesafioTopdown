@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+  <span>Catálogo e Pedidos</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav #sidenav opened mode="side" class="sidenav">
+    <mat-nav-list>
+      <h3 matSubheader>Menu</h3>
+      <a mat-list-item routerLink="/products" routerLinkActive="mat-accent">
+        <mat-icon matListItemIcon>inventory_2</mat-icon>
+        <span matListItemTitle>Produtos</span>
+      </a>
+      <a mat-list-item routerLink="/customers" routerLinkActive="mat-accent">
+        <mat-icon matListItemIcon>group</mat-icon>
+        <span matListItemTitle>Clientes</span>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/orders/new" routerLinkActive="mat-accent">
+        <mat-icon matListItemIcon>add_shopping_cart</mat-icon>
+        <span matListItemTitle>Novo Pedido</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

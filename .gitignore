@@ -1,0 +1,37 @@
+# Arquivo .gitignore para a raiz do projeto (Frontend + Backend)
+
+# Ignorar arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de IDEs
+.vscode/
+.idea/
+
+# --- Backend (.NET) ---
+
+# Ignorar a pasta de configurações do Visual Studio
+**/[Bb]ackend/**/.vs/
+
+# Ignorar pastas de compilação e binários
+**/[Bb]in/
+**/[Oo]bj/
+
+# Ignorar arquivos gerados pelo usuário
+*.user
+*.suo
+
+# --- Frontend (Angular) ---
+
+# Ignorar a pasta de dependências do Node.js
+**/[Ff]rontend/node_modules/
+
+# Ignorar arquivos de log do npm
+**/[Ff]rontend/npm-debug.log*
+
+# Ignorar arquivos de build do Angular
+**/[Ff]rontend/dist/
+**/[Ff]rontend/.angular/cache/
+
+# Ignorar arquivos de ambiente local (o .env nunca deve ir para o repositório)
+.env

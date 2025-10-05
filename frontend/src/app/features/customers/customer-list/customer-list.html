@@ -1,0 +1,58 @@
+<div class="container" style="padding: 24px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+    <h2 class="mat-headline-5" style="margin: 0;">Lista de Clientes</h2>
+    <a mat-flat-button color="primary" routerLink="/customers/new">Novo Cliente</a>
+  </div>
+
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Buscar clientes...</mat-label>
+    <input matInput placeholder="Ex: João" #input>
+  </mat-form-field>
+
+  <div class="list-container">
+    <div class="spinner-container" *ngIf="isLoadingResults">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div class="mat-elevation-z8" [class.hidden]="isLoadingResults">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let customer"> {{customer.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+          <td mat-cell *matCellDef="let customer"> {{customer.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let customer"> {{customer.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="document">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Documento </th>
+          <td mat-cell *matCellDef="let customer"> {{customer.document}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let customer">
+            <button mat-icon-button color="primary" [routerLink]="['/customers/edit', customer.id]">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteCustomer(customer.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="5">Nenhum cliente encontrado para "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+        aria-label="Selecione a página de clientes">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
