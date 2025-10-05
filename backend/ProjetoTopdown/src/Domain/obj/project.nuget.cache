@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "YijYFsRNWt4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ediso\\OneDrive\\Documentos\\Projetos Pessoais\\Processo TopDown\\backend\\ProjetoTopdown\\src\\Domain\\Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ediso\\.nuget\\packages\\menees.analyzers\\3.3.3\\menees.analyzers.3.3.3.nupkg.sha512"
+  ],
+  "logs": []
+}

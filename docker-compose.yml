@@ -1,0 +1,47 @@
+services:
+  # PostgreSQL
+  db:
+    image: postgres:16-alpine
+    container_name: topdown_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # .NET WebApi
+  backend:
+    container_name: topdown_backend
+    build:
+      context: ./backend/ProjetoTopdown
+      dockerfile: Dockerfile
+    ports:
+      - "7128:8080"
+    environment:
+      - ConnectionStrings__PostgresConnection=Server=db;Port=5432;Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Angular
+  frontend:
+    container_name: topdown_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
